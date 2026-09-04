@@ -19,16 +19,15 @@ export async function POST(req: NextRequest) {
     const serviceLabel =
       driverMode === "avec-voiture"
         ? "Chauffeur avec véhicule (VTC)"
-        : "Convoyage — chauffeur pour votre véhicule";
+        : "Chauffeur pour votre véhicule";
     const passengersLabel =
-      hasPassengers === true
-        ? " · Avec passagers"
-        : hasPassengers === false
-        ? " · Véhicule vide"
-        : "";
+      hasPassengers === true ? " · Avec passagers" : hasPassengers === false ? " · Véhicule vide" : "";
 
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["card"],
+      // PayPal must be enabled in Stripe Dashboard > Payment methods
+      payment_method_types: ["card", "paypal"] as ("card" | "paypal")[],
+      billing_address_collection: "required",
+      phone_number_collection: { enabled: true },
       line_items: [
         {
           price_data: {

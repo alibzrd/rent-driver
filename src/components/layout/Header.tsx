@@ -53,7 +53,7 @@ export default function Header() {
         {/* CTA */}
         <div className="flex items-center gap-3">
           <a
-            href="tel:+33600000000"
+            href="tel:+33767230362"
             style={{ backgroundColor: "#A1E3F9", color: "#000000" }}
             className="hidden sm:flex items-center gap-2 text-sm font-bold px-5 py-2.5 rounded-full hover:brightness-110 transition-all duration-200"
           >
@@ -86,7 +86,7 @@ export default function Header() {
             </a>
           ))}
           <a
-            href="tel:+33600000000"
+            href="tel:+33767230362"
             style={{ backgroundColor: "#A1E3F9", color: "#000000" }}
             className="flex items-center justify-center gap-2 font-bold px-5 py-2.5 rounded-full"
           >

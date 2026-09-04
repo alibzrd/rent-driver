@@ -22,7 +22,7 @@ import {
 } from "lucide-react";
 import { useSimulator } from "@/hooks/useSimulator";
 import PlaceAutocomplete from "@/components/ui/PlaceAutocomplete";
-import { buildWhatsAppLink, buildProWhatsAppLink } from "@/lib/pricing";
+import { buildWhatsAppLink, buildProWhatsAppLink, getRateLabel, calculatePrice } from "@/lib/pricing";
 
 type Step = "client-type" | "driver-mode" | "passengers" | "form" | "pro-devis";
 
@@ -132,7 +132,21 @@ export default function Simulator() {
       .then((data) => {
         const dist = data?.routes?.[0]?.distance;
         if (dist) {
-          setDistanceKm(Math.round(dist / 1000));
+          const km = Math.round(dist / 1000);
+          setDistanceKm(km);
+          const { price } = calculatePrice(km);
+          fetch("/api/notify-simulation", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              cityFrom: placeFrom.label,
+              cityTo: placeTo.label,
+              distanceKm: km,
+              price,
+              driverMode,
+              hasPassengers,
+            }),
+          }).catch(() => {});
         } else {
           setDistanceError("Impossible de calculer ce trajet. Vérifiez les villes.");
         }
@@ -240,7 +254,7 @@ export default function Simulator() {
             Estimez votre trajet
           </h2>
           <p className="text-white/50 text-sm">
-            À partir de 0,95 €/km · Forfait minimum 50 € · +20% nuit &amp; dimanche
+            De 0,79 à 0,95 €/km · Forfait minimum 50 € · +20% nuit &amp; dimanche
           </p>
         </motion.div>
 
@@ -529,9 +543,7 @@ export default function Simulator() {
                             {result.ratePerKm.toFixed(2).replace(".", ",")} €/km
                           </span>
                           <span>
-                            {distanceKm > 275
-                              ? "Tarif longue distance (> 275 km)"
-                              : "Tarif courte distance (≤ 275 km)"}
+                            {getRateLabel(distanceKm ?? 0)}
                           </span>
                         </div>
 

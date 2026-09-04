@@ -1,24 +1,34 @@
 // ─── Grille tarifaire ────────────────────────────────────────────────
-export const PRICE_PER_KM_SHORT = 0.95; // ≤ 275 km
-export const PRICE_PER_KM_LONG = 0.88;  // > 275 km
-export const KM_THRESHOLD = 275;
+export const PRICE_PER_KM_SHORT  = 0.95; // ≤ 300 km
+export const PRICE_PER_KM_MEDIUM = 0.85; // 300–700 km
+export const PRICE_PER_KM_LONG   = 0.79; // > 700 km
+export const KM_THRESHOLD_1 = 300;
+export const KM_THRESHOLD_2 = 700;
 export const MINIMUM_FARE = 50;
 export const NIGHT_SURCHARGE_RATE = 0.2;
 
-// Frais de déplacement du chauffeur (péages, carburant, transport)
-// sont TOUJOURS à la charge du client, non inclus dans ce tarif.
+// Frais de déplacement chauffeur (péages, carburant, transport retour)
+// = toujours à la charge du client, non inclus dans ce tarif.
 
-// Remplacer par le vrai numéro WhatsApp (sans + ni espaces)
-export const WHATSAPP_NUMBER = "33600000000";
+export const WHATSAPP_NUMBER = "33767230362";
+export const PHONE_DISPLAY   = "07 67 23 03 62";
 
 export function isNightSurcharge(date: Date = new Date()): boolean {
   const hour = date.getHours();
-  const day = date.getDay(); // 0 = dimanche
+  const day  = date.getDay(); // 0 = dimanche
   return hour >= 22 || hour < 6 || day === 0;
 }
 
 export function getRatePerKm(distanceKm: number): number {
-  return distanceKm > KM_THRESHOLD ? PRICE_PER_KM_LONG : PRICE_PER_KM_SHORT;
+  if (distanceKm > KM_THRESHOLD_2) return PRICE_PER_KM_LONG;
+  if (distanceKm > KM_THRESHOLD_1) return PRICE_PER_KM_MEDIUM;
+  return PRICE_PER_KM_SHORT;
+}
+
+export function getRateLabel(distanceKm: number): string {
+  if (distanceKm > KM_THRESHOLD_2) return "Tarif grande distance (> 700 km)";
+  if (distanceKm > KM_THRESHOLD_1) return "Tarif longue distance (300–700 km)";
+  return "Tarif courte distance (≤ 300 km)";
 }
 
 export function calculatePrice(
@@ -56,12 +66,12 @@ export function buildWhatsAppLink(
   const driver =
     options.driverMode === "avec-voiture"
       ? "un chauffeur avec son véhicule (service VTC)"
-      : "un chauffeur pour conduire mon véhicule (convoyage)";
+      : "un chauffeur pour conduire mon véhicule";
   const passengers =
     options.hasPassengers === true
-      ? "La voiture transportera des passagers."
+      ? "Le véhicule transportera des passagers."
       : options.hasPassengers === false
-      ? "La voiture sera vide."
+      ? "Le véhicule sera vide."
       : "";
   const text =
     `Bonjour, je souhaite réserver ${driver} pour un trajet de ${cityFrom} vers ${cityTo} (${distanceKm} km). ` +
