@@ -393,7 +393,7 @@ export default function Simulator() {
                 <SelectCard
                   icon={<PackageOpen size={18} />}
                   title="Voiture vide"
-                  subtitle="Le véhicule sera conduit sans passager — convoyage seul."
+                  subtitle="Le véhicule sera conduit sans passager."
                   selected={hasPassengers === false}
                   onClick={() => {
                     setHasPassengers(false);

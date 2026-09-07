@@ -15,20 +15,21 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Rent Driver — Convoyage de véhicules privés",
+  title: "Rent Driver — Chauffeur pour votre véhicule",
   description:
-    "Service premium de convoyage et de livraison de véhicules privés partout en France. Chauffeurs professionnels, assurés et disponibles 7j/7.",
+    "Service de chauffeur professionnel partout en France. Avec ou sans votre voiture — chauffeurs assurés, disponibles 7j/7. Vernon Giverny.",
   keywords: [
-    "convoyage véhicule",
+    "chauffeur véhicule",
     "livraison voiture",
     "chauffeur privé",
     "transport véhicule France",
+    "service chauffeur",
   ],
   authors: [{ name: "Rent Driver" }],
   openGraph: {
-    title: "Rent Driver — Convoyage de véhicules privés",
+    title: "Rent Driver — Chauffeur pour votre véhicule",
     description:
-      "Service premium de convoyage et de livraison de véhicules privés partout en France.",
+      "Service de chauffeur professionnel partout en France. Avec ou sans votre voiture.",
     type: "website",
     locale: "fr_FR",
   },

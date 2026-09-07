@@ -79,7 +79,7 @@ export default function Hero() {
             style={{ border: "1px solid rgba(161,227,249,0.3)", color: "#A1E3F9", backgroundColor: "rgba(161,227,249,0.06)" }}
             className="text-xs font-semibold tracking-[0.15em] uppercase px-4 py-1.5 rounded-full"
           >
-            Service de chauffeur — France & Europe
+            Chauffeur de confiance — France & Europe
           </span>
         </motion.div>
 
@@ -88,7 +88,7 @@ export default function Hero() {
           custom={1} initial="hidden" animate="visible" variants={fadeUp}
           className="font-display text-5xl sm:text-6xl md:text-7xl font-black leading-[1.05] tracking-tight mb-6 text-white"
         >
-          Votre voiture livrée.{" "}
+          Vous ne pouvez pas conduire ?{" "}
           <span
             style={{
               background: "linear-gradient(135deg, #ffffff 0%, #A1E3F9 100%)",
@@ -97,7 +97,7 @@ export default function Hero() {
               backgroundClip: "text",
             }}
           >
-            Vous, libre.
+            On s&apos;en occupe.
           </span>
         </motion.h1>
 
@@ -106,8 +106,9 @@ export default function Hero() {
           custom={2} initial="hidden" animate="visible" variants={fadeUp}
           className="text-lg sm:text-xl text-white/55 max-w-2xl mx-auto mb-10 leading-relaxed"
         >
-          Un chauffeur se déplace à votre véhicule — ou arrive avec le sien.
-          Vous prenez le train, on gère le reste.
+          Problème de santé, permis suspendu, fatigue… Un chauffeur de confiance
+          prend en charge votre véhicule et le dépose où vous en avez besoin.
+          Sans stress, sans complication.
         </motion.p>
 
         {/* Two service pills */}

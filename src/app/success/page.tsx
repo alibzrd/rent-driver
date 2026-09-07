@@ -102,7 +102,7 @@ export default async function SuccessPage({ searchParams }: Props) {
             Retour à l&apos;accueil
           </a>
           <a
-            href="tel:+33600000000"
+            href="tel:+33767230362"
             style={{ backgroundColor: "#A1E3F9", color: "#000000" }}
             className="flex items-center justify-center gap-2 px-6 py-3 rounded-full text-sm font-bold hover:brightness-110 transition-all"
           >

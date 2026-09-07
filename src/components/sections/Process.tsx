@@ -9,7 +9,7 @@ const STEPS = [
     icon: Calculator,
     title: "Simulation",
     description:
-      "Renseignez votre ville de départ, d'arrivée et la distance. Obtenez une estimation instantanée du prix de votre convoyage.",
+      "Renseignez votre ville de départ et d'arrivée. Obtenez une estimation instantanée du prix de votre trajet.",
   },
   {
     number: "02",

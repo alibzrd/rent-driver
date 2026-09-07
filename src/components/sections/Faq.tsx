@@ -8,7 +8,7 @@ const FAQS = [
   {
     question: "Le trajet est-il couvert par une assurance ?",
     answer:
-      "Oui. Chaque convoyage est couvert par une assurance Tous Risques spécifique au transport de véhicules privés. Votre voiture est protégée de la prise en charge jusqu'à la livraison, quel que soit le trajet ou la valeur du véhicule.",
+      "Oui. Chaque prestation est couverte par une assurance Tous Risques spécifique au transport de véhicules privés. Votre voiture est protégée de la prise en charge jusqu'à la livraison, quel que soit le trajet ou la valeur du véhicule.",
   },
   {
     question: "Les frais de carburant et de péage sont-ils inclus ?",
@@ -160,7 +160,7 @@ export default function Faq() {
         >
           Autre question ?{" "}
           <a
-            href="https://wa.me/33600000000"
+            href="https://wa.me/33767230362"
             target="_blank"
             rel="noopener noreferrer"
             style={{ color: "#A1E3F9" }}
