@@ -9,7 +9,7 @@ const SERVICES = [
     badge: "Urgence & Empêchement",
     title: "Immobilisé ? Votre vie ne s'arrête pas.",
     description:
-      "Problème de santé, fatigue intense, perte de permis… Peu importe la raison — sans jugement. Un chauffeur récupère votre véhicule et le livre à l'adresse de votre choix.",
+      "Problème de santé, mobilité réduite, perte de permis, fatigue… Peu importe la raison — sans jugement. Un chauffeur récupère votre véhicule et le livre à l'adresse de votre choix.",
     points: [
       "Disponible sous 48h",
       "Perte de permis : intervention sous 24h",
