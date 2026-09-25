@@ -15,23 +15,40 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Rent Driver — Chauffeur pour votre véhicule",
+  title: "Rent Driver — Chauffeur pour votre véhicule | France",
   description:
-    "Service de chauffeur professionnel partout en France. Avec ou sans votre voiture — chauffeurs assurés, disponibles 7j/7. Vernon Giverny.",
+    "Besoin d'un chauffeur pour conduire votre voiture ? Rent Driver intervient partout en France sous 24h à 48h. Service avec ou sans votre véhicule. Tarifs dès 0,79 €/km.",
   keywords: [
     "chauffeur véhicule",
-    "livraison voiture",
-    "chauffeur privé",
-    "transport véhicule France",
-    "service chauffeur",
+    "chauffeur pour conduire ma voiture",
+    "livraison voiture France",
+    "chauffeur privé domicile",
+    "transport véhicule longue distance",
+    "chauffeur perte de permis",
+    "service VTC",
+    "Vernon Giverny",
   ],
   authors: [{ name: "Rent Driver" }],
+  metadataBase: new URL("https://rentdriver.fr"),
+  alternates: { canonical: "/" },
   openGraph: {
     title: "Rent Driver — Chauffeur pour votre véhicule",
     description:
-      "Service de chauffeur professionnel partout en France. Avec ou sans votre voiture.",
+      "Chauffeur professionnel partout en France sous 24h–48h. Avec ou sans votre voiture. Tarifs dès 0,79 €/km.",
     type: "website",
     locale: "fr_FR",
+    url: "https://rentdriver.fr",
+    siteName: "Rent Driver",
+  },
+  twitter: {
+    card: "summary",
+    title: "Rent Driver — Chauffeur pour votre véhicule",
+    description: "Chauffeur professionnel partout en France. Tarifs dès 0,79 €/km. Disponible sous 24h–48h.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
   },
 };
 
