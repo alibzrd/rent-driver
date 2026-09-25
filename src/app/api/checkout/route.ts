@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
       apiVersion: "2026-04-22.dahlia",
     });
-    const { price, cityFrom, cityTo, distanceKm, driverMode, hasPassengers, bookingDate, bookingTime } = await req.json();
+    const { price, cityFrom, cityTo, distanceKm, driverMode, hasPassengers, bookingDate, bookingTime, bookingPhone } = await req.json();
 
     if (!price || !cityFrom || !cityTo) {
       return NextResponse.json({ error: "Paramètres manquants." }, { status: 400 });
@@ -53,6 +53,7 @@ export async function POST(req: NextRequest) {
         hasPassengers: hasPassengers != null ? String(hasPassengers) : "",
         bookingDate: bookingDate ?? "",
         bookingTime: bookingTime ?? "",
+        bookingPhone: bookingPhone ?? "",
       },
     });
 

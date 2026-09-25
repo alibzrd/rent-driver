@@ -96,6 +96,7 @@ export default function Simulator() {
   const [checkoutError, setCheckoutError] = useState<string | null>(null);
   const [bookingDate, setBookingDate] = useState("");
   const [bookingTime, setBookingTime] = useState("");
+  const [bookingPhone, setBookingPhone] = useState("");
 
   const {
     placeFrom,
@@ -175,6 +176,7 @@ export default function Simulator() {
           hasPassengers,
           bookingDate,
           bookingTime,
+          bookingPhone,
         }),
       });
       const data = await res.json();
@@ -196,6 +198,7 @@ export default function Simulator() {
     setCheckoutError(null);
     setBookingDate("");
     setBookingTime("");
+    setBookingPhone("");
   };
 
   // Step labels for breadcrumb / back nav
@@ -457,6 +460,20 @@ export default function Simulator() {
                       placeholder="Ex : Lyon"
                       onSelect={setPlaceTo}
                       onClear={() => setPlaceTo(null)}
+                    />
+                  </motion.div>
+
+                  {/* Téléphone */}
+                  <motion.div variants={fieldVariants} className="flex flex-col gap-2">
+                    <label className="text-white/60 text-xs font-semibold tracking-wide uppercase flex items-center gap-1.5">
+                      Numéro de téléphone
+                    </label>
+                    <input
+                      type="tel"
+                      value={bookingPhone}
+                      onChange={(e) => setBookingPhone(e.target.value)}
+                      placeholder="Ex : 06 12 34 56 78"
+                      className="input-dark w-full px-4 py-3 rounded-xl text-sm text-white placeholder:text-white/25"
                     />
                   </motion.div>
 
