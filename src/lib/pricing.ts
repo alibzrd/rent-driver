@@ -54,6 +54,9 @@ export function formatPrice(price: number): string {
 export interface WhatsAppOptions {
   driverMode?: "sans-voiture" | "avec-voiture";
   hasPassengers?: boolean;
+  bookingDate?: string;
+  bookingTime?: string;
+  bookingPhone?: string;
 }
 
 export function buildWhatsAppLink(
@@ -73,9 +76,15 @@ export function buildWhatsAppLink(
       : options.hasPassengers === false
       ? "Le véhicule sera vide."
       : "";
+  const dateTime = options.bookingDate
+    ? `Date souhaitée : ${options.bookingDate}${options.bookingTime ? ` à ${options.bookingTime}` : ""}.`
+    : "";
+  const phone = options.bookingPhone ? `Mon numéro : ${options.bookingPhone}.` : "";
   const text =
     `Bonjour, je souhaite réserver ${driver} pour un trajet de ${cityFrom} vers ${cityTo} (${distanceKm} km). ` +
     `${passengers ? passengers + " " : ""}` +
+    `${dateTime ? dateTime + " " : ""}` +
+    `${phone ? phone + " " : ""}` +
     `Estimation affichée : ${price}€. ` +
     `Je prends en charge les frais de déplacement du chauffeur (péages, carburant, transport).`;
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;

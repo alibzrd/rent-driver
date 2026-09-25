@@ -17,7 +17,6 @@ import {
   Users,
   Briefcase,
   UserRound,
-  CreditCard,
   PackageOpen,
 } from "lucide-react";
 import { useSimulator } from "@/hooks/useSimulator";
@@ -92,8 +91,6 @@ export default function Simulator() {
   const noToken = !token || token === "pk.ton_token_mapbox_copie_ici";
 
   const [step, setStep] = useState<Step>("client-type");
-  const [isCheckingOut, setIsCheckingOut] = useState(false);
-  const [checkoutError, setCheckoutError] = useState<string | null>(null);
   const [bookingDate, setBookingDate] = useState("");
   const [bookingTime, setBookingTime] = useState("");
   const [bookingPhone, setBookingPhone] = useState("");
@@ -159,43 +156,10 @@ export default function Simulator() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [placeFrom, placeTo]);
 
-  const handleCheckout = async () => {
-    if (!result || !placeFrom || !placeTo || distanceKm === null) return;
-    setIsCheckingOut(true);
-    setCheckoutError(null);
-    try {
-      const res = await fetch("/api/checkout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          price: result.price,
-          cityFrom: placeFrom.label,
-          cityTo: placeTo.label,
-          distanceKm,
-          driverMode,
-          hasPassengers,
-          bookingDate,
-          bookingTime,
-          bookingPhone,
-        }),
-      });
-      const data = await res.json();
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        setCheckoutError(data.error ?? "Erreur lors du paiement.");
-      }
-    } catch {
-      setCheckoutError("Erreur réseau. Réessayez.");
-    } finally {
-      setIsCheckingOut(false);
-    }
-  };
 
   const handleReset = () => {
     reset();
     setStep("client-type");
-    setCheckoutError(null);
     setBookingDate("");
     setBookingTime("");
     setBookingPhone("");
@@ -220,9 +184,12 @@ export default function Simulator() {
 
   const whatsappLink =
     result && placeFrom && placeTo && distanceKm !== null
-      ? buildWhatsAppLink(placeFrom.value, placeTo.value, distanceKm, result.price, {
+      ? buildWhatsAppLink(placeFrom.label, placeTo.label, distanceKm, result.price, {
           driverMode: driverMode ?? undefined,
           hasPassengers: hasPassengers ?? undefined,
+          bookingDate: bookingDate || undefined,
+          bookingTime: bookingTime || undefined,
+          bookingPhone: bookingPhone || undefined,
         })
       : "#";
 
@@ -626,40 +593,20 @@ export default function Simulator() {
                           </p>
                         </div>
 
-                        {/* Stripe CTA */}
-                        <motion.button
-                          onClick={handleCheckout}
-                          disabled={isCheckingOut}
-                          style={{ backgroundColor: "#A1E3F9", color: "#000000" }}
-                          className="flex items-center justify-center gap-2.5 w-full py-4 rounded-xl font-bold text-sm disabled:opacity-60 disabled:cursor-not-allowed"
-                          whileHover={!isCheckingOut ? { scale: 1.02, boxShadow: "0 0 32px rgba(161,227,249,0.3)" } : {}}
-                          whileTap={!isCheckingOut ? { scale: 0.97 } : {}}
+                        {/* WhatsApp CTA */}
+                        <motion.a
+                          href={whatsappLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{ backgroundColor: "#25D366", color: "#000000" }}
+                          className="flex items-center justify-center gap-2.5 w-full py-4 rounded-xl font-bold text-sm"
+                          whileHover={{ scale: 1.02, boxShadow: "0 0 32px rgba(37,211,102,0.3)" }}
+                          whileTap={{ scale: 0.97 }}
                           transition={{ duration: 0.15 }}
                         >
-                          {isCheckingOut ? (
-                            <Loader2 size={17} className="animate-spin" />
-                          ) : (
-                            <CreditCard size={17} strokeWidth={2.5} />
-                          )}
-                          {isCheckingOut ? "Redirection…" : "Réserver et payer"}
-                        </motion.button>
-
-                        {checkoutError && (
-                          <p className="text-red-400/70 text-xs text-center mt-3">{checkoutError}</p>
-                        )}
-
-                        {/* WhatsApp secondary */}
-                        <div className="flex items-center justify-center gap-1.5 mt-4">
-                          <MessageCircle size={13} style={{ color: "rgba(161,227,249,0.4)" }} />
-                          <a
-                            href={whatsappLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-white/35 text-xs hover:text-white/60 transition-colors"
-                          >
-                            Une question ? Écrivez-nous sur WhatsApp
-                          </a>
-                        </div>
+                          <MessageCircle size={17} strokeWidth={2.5} />
+                          Réserver via WhatsApp
+                        </motion.a>
 
                         {/* Reset */}
                         <div className="flex justify-center mt-5 pt-5" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
