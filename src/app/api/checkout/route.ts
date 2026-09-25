@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
       apiVersion: "2026-04-22.dahlia",
     });
-    const { price, cityFrom, cityTo, distanceKm, driverMode, hasPassengers } = await req.json();
+    const { price, cityFrom, cityTo, distanceKm, driverMode, hasPassengers, bookingDate, bookingTime } = await req.json();
 
     if (!price || !cityFrom || !cityTo) {
       return NextResponse.json({ error: "Paramètres manquants." }, { status: 400 });
@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
             currency: "eur",
             product_data: {
               name: `${serviceLabel} — ${cityFrom} → ${cityTo}`,
-              description: `${distanceKm} km${passengersLabel} · Chauffeur professionnel`,
+              description: `${distanceKm} km${passengersLabel} · Chauffeur professionnel${bookingDate ? ` · ${bookingDate}${bookingTime ? ` à ${bookingTime}` : ""}` : ""}`,
             },
             unit_amount: Math.round(price * 100),
           },
@@ -51,6 +51,8 @@ export async function POST(req: NextRequest) {
         price: String(price),
         driverMode: driverMode ?? "",
         hasPassengers: hasPassengers != null ? String(hasPassengers) : "",
+        bookingDate: bookingDate ?? "",
+        bookingTime: bookingTime ?? "",
       },
     });
 

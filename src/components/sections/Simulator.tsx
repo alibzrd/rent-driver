@@ -94,6 +94,8 @@ export default function Simulator() {
   const [step, setStep] = useState<Step>("client-type");
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [checkoutError, setCheckoutError] = useState<string | null>(null);
+  const [bookingDate, setBookingDate] = useState("");
+  const [bookingTime, setBookingTime] = useState("");
 
   const {
     placeFrom,
@@ -171,6 +173,8 @@ export default function Simulator() {
           distanceKm,
           driverMode,
           hasPassengers,
+          bookingDate,
+          bookingTime,
         }),
       });
       const data = await res.json();
@@ -190,6 +194,8 @@ export default function Simulator() {
     reset();
     setStep("client-type");
     setCheckoutError(null);
+    setBookingDate("");
+    setBookingTime("");
   };
 
   // Step labels for breadcrumb / back nav
@@ -452,6 +458,35 @@ export default function Simulator() {
                       onSelect={setPlaceTo}
                       onClear={() => setPlaceTo(null)}
                     />
+                  </motion.div>
+
+                  {/* Date + Heure */}
+                  <motion.div variants={fieldVariants} className="grid grid-cols-2 gap-3">
+                    <div className="flex flex-col gap-2">
+                      <label className="text-white/60 text-xs font-semibold tracking-wide uppercase">
+                        Date
+                      </label>
+                      <input
+                        type="date"
+                        value={bookingDate}
+                        onChange={(e) => setBookingDate(e.target.value)}
+                        min={new Date().toISOString().split("T")[0]}
+                        className="input-dark w-full px-4 py-3 rounded-xl text-sm text-white"
+                        style={{ colorScheme: "dark" }}
+                      />
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      <label className="text-white/60 text-xs font-semibold tracking-wide uppercase">
+                        Heure
+                      </label>
+                      <input
+                        type="time"
+                        value={bookingTime}
+                        onChange={(e) => setBookingTime(e.target.value)}
+                        className="input-dark w-full px-4 py-3 rounded-xl text-sm text-white"
+                        style={{ colorScheme: "dark" }}
+                      />
+                    </div>
                   </motion.div>
 
                   {/* Distance row */}
