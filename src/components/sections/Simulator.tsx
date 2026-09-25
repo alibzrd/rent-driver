@@ -94,6 +94,8 @@ export default function Simulator() {
   const [bookingDate, setBookingDate] = useState("");
   const [bookingTime, setBookingTime] = useState("");
   const [bookingPhone, setBookingPhone] = useState("");
+  const [bookingFirstName, setBookingFirstName] = useState("");
+  const [bookingLastName, setBookingLastName] = useState("");
 
   const {
     placeFrom,
@@ -163,6 +165,8 @@ export default function Simulator() {
     setBookingDate("");
     setBookingTime("");
     setBookingPhone("");
+    setBookingFirstName("");
+    setBookingLastName("");
   };
 
   // Step labels for breadcrumb / back nav
@@ -190,6 +194,8 @@ export default function Simulator() {
           bookingDate: bookingDate || undefined,
           bookingTime: bookingTime || undefined,
           bookingPhone: bookingPhone || undefined,
+          bookingFirstName: bookingFirstName || undefined,
+          bookingLastName: bookingLastName || undefined,
         })
       : "#";
 
@@ -428,6 +434,34 @@ export default function Simulator() {
                       onSelect={setPlaceTo}
                       onClear={() => setPlaceTo(null)}
                     />
+                  </motion.div>
+
+                  {/* Nom + Prénom */}
+                  <motion.div variants={fieldVariants} className="grid grid-cols-2 gap-3">
+                    <div className="flex flex-col gap-2">
+                      <label className="text-white/60 text-xs font-semibold tracking-wide uppercase">
+                        Prénom
+                      </label>
+                      <input
+                        type="text"
+                        value={bookingFirstName}
+                        onChange={(e) => setBookingFirstName(e.target.value)}
+                        placeholder="Ex : Jean"
+                        className="input-dark w-full px-4 py-3 rounded-xl text-sm text-white placeholder:text-white/25"
+                      />
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      <label className="text-white/60 text-xs font-semibold tracking-wide uppercase">
+                        Nom
+                      </label>
+                      <input
+                        type="text"
+                        value={bookingLastName}
+                        onChange={(e) => setBookingLastName(e.target.value)}
+                        placeholder="Ex : Dupont"
+                        className="input-dark w-full px-4 py-3 rounded-xl text-sm text-white placeholder:text-white/25"
+                      />
+                    </div>
                   </motion.div>
 
                   {/* Téléphone */}

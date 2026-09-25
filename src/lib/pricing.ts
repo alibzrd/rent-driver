@@ -57,6 +57,8 @@ export interface WhatsAppOptions {
   bookingDate?: string;
   bookingTime?: string;
   bookingPhone?: string;
+  bookingFirstName?: string;
+  bookingLastName?: string;
 }
 
 export function buildWhatsAppLink(
@@ -76,12 +78,16 @@ export function buildWhatsAppLink(
       : options.hasPassengers === false
       ? "Le véhicule sera vide."
       : "";
+  const fullName =
+    options.bookingFirstName || options.bookingLastName
+      ? `${options.bookingFirstName ?? ""} ${options.bookingLastName ?? ""}`.trim()
+      : "";
   const dateTime = options.bookingDate
     ? `Date souhaitée : ${options.bookingDate}${options.bookingTime ? ` à ${options.bookingTime}` : ""}.`
     : "";
   const phone = options.bookingPhone ? `Mon numéro : ${options.bookingPhone}.` : "";
   const text =
-    `Bonjour, je souhaite réserver ${driver} pour un trajet de ${cityFrom} vers ${cityTo} (${distanceKm} km). ` +
+    `Bonjour${fullName ? `, je m'appelle ${fullName}` : ""}. Je souhaite réserver ${driver} pour un trajet de ${cityFrom} vers ${cityTo} (${distanceKm} km). ` +
     `${passengers ? passengers + " " : ""}` +
     `${dateTime ? dateTime + " " : ""}` +
     `${phone ? phone + " " : ""}` +
