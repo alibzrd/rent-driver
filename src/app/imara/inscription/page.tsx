@@ -463,7 +463,6 @@ function InscriptionForm() {
   );
 }
 
-export { InscriptionPage };
 
 function Field({
   label, value, onChange, placeholder, type = "text",

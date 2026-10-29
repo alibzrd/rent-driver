@@ -1,4 +1,5 @@
-import { PHONE_DISPLAY } from "@/lib/pricing";
+import { PHONE_DISPLAY, PHONE_E164 } from "@/lib/pricing";
+import ManageCookiesButton from "@/components/tracking/ManageCookiesButton";
 
 const CITIES_FR = [
   "Aix-en-Provence","Amiens","Angers","Annecy","Bordeaux","Brest","Caen","Dijon",
@@ -27,7 +28,13 @@ export default function Footer() {
           <p className="text-white/40 text-sm max-w-xs">
             Service de chauffeur professionnel — France &amp; Europe.
           </p>
-          <p className="text-white/30 text-xs mt-1">{PHONE_DISPLAY}</p>
+          <a
+            href={`tel:${PHONE_E164}`}
+            data-track-placement="footer"
+            className="inline-block text-white/30 hover:text-white/60 text-xs mt-1 transition-colors"
+          >
+            {PHONE_DISPLAY}
+          </a>
         </div>
 
         {/* SEO Cities — France */}
@@ -68,6 +75,7 @@ export default function Footer() {
             <a href="/mentions-legales" className="hover:text-white/60 transition-colors">Mentions légales</a>
             <a href="/politique-de-confidentialite" className="hover:text-white/60 transition-colors">Confidentialité</a>
             <a href="/cgv" className="hover:text-white/60 transition-colors">CGV</a>
+            <ManageCookiesButton className="hover:text-white/60 transition-colors" />
           </div>
         </div>
       </div>
