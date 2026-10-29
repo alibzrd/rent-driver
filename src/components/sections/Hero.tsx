@@ -3,7 +3,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 import { ArrowRight, Shield, Clock, MapPin, Car, Users } from "lucide-react";
-import { PHONE_DISPLAY } from "@/lib/pricing";
+import { PHONE_DISPLAY, PHONE_E164 } from "@/lib/pricing";
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
@@ -148,6 +148,7 @@ export default function Hero() {
         >
           <a
             href="#simulator"
+            data-track-placement="hero"
             style={{ backgroundColor: "#A1E3F9", color: "#000000" }}
             className="flex items-center gap-2 px-8 py-4 rounded-full font-bold text-sm tracking-wide hover:brightness-110 transition-all duration-200 shadow-lg"
           >
@@ -155,7 +156,8 @@ export default function Hero() {
             <ArrowRight size={16} strokeWidth={2.5} />
           </a>
           <a
-            href={`tel:+${PHONE_DISPLAY.replace(/\s/g, "")}`}
+            href={`tel:${PHONE_E164}`}
+            data-track-placement="hero"
             style={{ border: "1px solid rgba(161,227,249,0.25)", color: "rgba(240,240,240,0.8)" }}
             className="flex items-center gap-2 px-8 py-4 rounded-full font-medium text-sm hover:border-[rgba(161,227,249,0.6)] hover:text-white transition-all duration-200"
           >

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
+import { WHATSAPP_NUMBER } from "@/lib/pricing";
 
 const FAQS = [
   {
@@ -13,7 +14,7 @@ const FAQS = [
   {
     question: "Les frais de carburant et de péage sont-ils inclus ?",
     answer:
-      "Non. L'estimation affichée dans le simulateur correspond uniquement aux frais de chauffeur (1,50 €/km). Les frais de carburant et de péage s'ajoutent selon l'itinéraire réel et sont détaillés dans le devis définitif confirmé par WhatsApp.",
+      "Non. L'estimation affichée dans le simulateur correspond uniquement aux frais de chauffeur (de 0,79 à 0,95 €/km selon la distance). Les frais de carburant et de péage s'ajoutent selon l'itinéraire réel et sont détaillés dans le devis définitif confirmé par WhatsApp.",
   },
   {
     question: "Comment sont sélectionnés vos chauffeurs ?",
@@ -160,7 +161,8 @@ export default function Faq() {
         >
           Autre question ?{" "}
           <a
-            href="https://wa.me/33767230362"
+            href={`https://wa.me/${WHATSAPP_NUMBER}`}
+            data-track-placement="faq"
             target="_blank"
             rel="noopener noreferrer"
             style={{ color: "#A1E3F9" }}

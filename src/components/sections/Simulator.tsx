@@ -22,6 +22,7 @@ import {
 import { useSimulator } from "@/hooks/useSimulator";
 import PlaceAutocomplete from "@/components/ui/PlaceAutocomplete";
 import { buildWhatsAppLink, buildProWhatsAppLink, getRateLabel, calculatePrice } from "@/lib/pricing";
+import { trackSimulationComplete, trackSimulationStart } from "@/lib/analytics";
 
 type Step = "client-type" | "driver-mode" | "passengers" | "form" | "pro-devis";
 
@@ -137,6 +138,7 @@ export default function Simulator() {
           const km = Math.round(dist / 1000);
           setDistanceKm(km);
           const { price } = calculatePrice(km);
+          trackSimulationComplete({ distanceKm: km, price, driverMode });
           fetch("/api/notify-simulation", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -305,6 +307,7 @@ export default function Simulator() {
                   selected={clientType === "particulier"}
                   onClick={() => {
                     setClientType("particulier");
+                    trackSimulationStart("particulier");
                     setStep("driver-mode");
                   }}
                 />
@@ -315,6 +318,7 @@ export default function Simulator() {
                   selected={clientType === "professionnel"}
                   onClick={() => {
                     setClientType("professionnel");
+                    trackSimulationStart("professionnel");
                     setStep("pro-devis");
                   }}
                 />
@@ -630,6 +634,9 @@ export default function Simulator() {
                         {/* WhatsApp CTA */}
                         <motion.a
                           href={whatsappLink}
+                          data-track-placement="simulateur"
+                          data-track-intent="reservation"
+                          data-track-value={result?.price}
                           target="_blank"
                           rel="noopener noreferrer"
                           style={{ backgroundColor: "#25D366", color: "#000000" }}
@@ -715,6 +722,8 @@ export default function Simulator() {
 
                 <motion.a
                   href={buildProWhatsAppLink()}
+                  data-track-placement="simulateur_pro"
+                  data-track-intent="devis"
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{ backgroundColor: "#A1E3F9", color: "#000000" }}

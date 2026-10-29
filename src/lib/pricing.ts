@@ -12,6 +12,7 @@ export const NIGHT_SURCHARGE_RATE = 0.2;
 
 export const WHATSAPP_NUMBER = "33767230362";
 export const PHONE_DISPLAY   = "07 67 23 03 62";
+export const PHONE_E164     = "+33767230362"; // format des liens tel:
 
 export function isNightSurcharge(date: Date = new Date()): boolean {
   const hour = date.getHours();
