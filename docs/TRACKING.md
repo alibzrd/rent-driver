@@ -34,7 +34,7 @@ Pour ajouter un nouveau bouton WhatsApp ou téléphone : rien à faire, il est s
 
 | Variable | Exemple | Où la trouver |
 | --- | --- | --- |
-| `NEXT_PUBLIC_GA4_ID` | `G-XXXXXXXXXX` | GA4 → Administration → Flux de données → Web |
+| `NEXT_PUBLIC_GA4_ID` | `G-7CCDPNSL3P` (déjà dans le code) | GA4 → Administration → Flux de données → Web |
 | `NEXT_PUBLIC_GOOGLE_ADS_ID` | `AW-123456789` | Google Ads → Objectifs → Conversions → balise |
 | `NEXT_PUBLIC_GOOGLE_ADS_LEAD_LABEL` | `AbCdEfGhIj` | Partie après le `/` dans `send_to` de l'action de conversion (facultatif, voir plus bas) |
 | `NEXT_PUBLIC_META_PIXEL_ID` | `123456789012345` | Meta Events Manager → Sources de données → Pixel |

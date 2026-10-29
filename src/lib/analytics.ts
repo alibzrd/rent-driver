@@ -1,6 +1,8 @@
 // ─── Tracking Rent Driver ─────────────────────────────────────────────
-// Toutes les clés sont optionnelles : tant qu'une variable d'environnement
-// est vide, l'outil correspondant n'est ni chargé ni affiché dans le bandeau.
+// Ces identifiants sont publics (ils apparaissent dans le code de toute page
+// qui utilise ces outils). Valeur par défaut ci-dessous, surchargeable par
+// variable d'environnement. Tant qu'un identifiant est vide, l'outil
+// correspondant n'est ni chargé ni affiché dans le bandeau.
 //
 //   NEXT_PUBLIC_GA4_ID                    ex. G-XXXXXXXXXX
 //   NEXT_PUBLIC_GOOGLE_ADS_ID             ex. AW-123456789
@@ -9,7 +11,7 @@
 //
 // Les événements ne partent que si le visiteur a donné son consentement.
 
-export const GA4_ID = process.env.NEXT_PUBLIC_GA4_ID ?? "";
+export const GA4_ID = process.env.NEXT_PUBLIC_GA4_ID || "G-7CCDPNSL3P"; // GA4 « Rent Driver – Site »
 export const GOOGLE_ADS_ID = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID ?? "";
 export const GOOGLE_ADS_LEAD_LABEL = process.env.NEXT_PUBLIC_GOOGLE_ADS_LEAD_LABEL ?? "";
 export const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID ?? "";
